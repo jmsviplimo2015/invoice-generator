@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- html2canvas Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Input Form -->
+        <div class="form-section">
+            <h2>Invoice Details Input</h2>
+            <form id="invoice-form">
+                <fieldset>
+                    <legend>Header & Confirmation</legend>
+                    <label for="companyName">Company Name:</label>
+                    <input type="text" id="companyName" value="JMS VIP Limo Worldwide Corporation">
+
+                    <label for="companyAddress">Company Address:</label>
+                    <input type="text" id="companyAddress" value="250 South Van Brunt Street, Suite# F, Englewood, NJ 07631">
+
+                    <label for="invoiceDate">Invoice Date:</label>
+                    <input type="date" id="invoiceDate" value="2025-04-19">
+
+                    <label for="confirmationNumber">Confirmation #:</label>
+                    <input type="text" id="confirmationNumber" value="39356">
+
+                    <label for="farmInConfirmation">Farm-In Confirmation:</label>
+                    <input type="text" id="farmInConfirmation" value="HOME">
+                 </fieldset>
+
+                <fieldset>
+                     <legend>Ride Details</legend>
+                    <label for="pickupDate">Pickup Date:</label>
+                    <input type="date" id="pickupDate" value="2025-04-19">
+
+                    <label for="vehicle">Vehicle:</label>
+                    <input type="text" id="vehicle" value="SEDAN">
+
+                    <label for="reservationTime">Reservation Pickup Time:</label>
+                    <input type="time" id="reservationTime" value="16:00"> <!-- 4:00 PM -->
+
+                    <label for="pickupTime">Actual Pickup Time:</label>
+                    <input type="time" id="pickupTime" value="16:00"> <!-- 4:00 PM -->
+
+                    <label for="dropoffTime">Drop Off Time:</label>
+                    <input type="time" id="dropoffTime" value="20:31"> <!-- 8:31 PM -->
+
+                    <label for="pickupPoint">Pickup Point:</label>
+                    <input type="text" id="pickupPoint" value="25 Columbus Cir, New York, NY">
+
+                    <label for="primaryPassenger">Primary Passenger:</label>
+                    <input type="text" id="primaryPassenger" value="Natasha Kagalovsky">
+
+                    <label for="additionalPassengers">Add. Passenger/Luggage:</label>
+                    <input type="number" id="additionalPassengers" value="0" min="0">
+
+                    <label for="stopLocation">Stop Location:</label>
+                    <input type="text" id="stopLocation" value="425 E 20th St, New York, NY 10001">
+
+                    <label for="dropoffLocation">Drop Off Location:</label>
+                    <input type="text" id="dropoffLocation" value="25 Columbus Cir, New York, NY">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Billing Details</legend>
+                    <label for="flatHours">Flat Rate Hours:</label>
+                    <input type="number" id="flatHours" value="4" step="0.5">
+
+                    <label for="flatMins">Flat Rate Minutes:</label>
+                    <input type="number" id="flatMins" value="30" step="15" max="45">
+
+                    <label for="flatRate">Flat Rate ($ per hour):</label>
+                    <input type="number" id="flatRate" value="95.00" step="0.01">
+
+                    <label for="stopsCost">Stops Cost ($):</label>
+                    <input type="number" id="stopsCost" value="0.00" step="0.01">
+
+                    <label for="waitingCost">Waiting Time Cost ($):</label>
+                    <input type="number" id="waitingCost" value="0.00" step="0.01">
+
+                    <label for="tollCost">Toll ($):</label>
+                    <input type="number" id="tollCost" value="0.00" step="0.01"> <!-- Example assumes $0, original shows $15 maybe as service charge? Adjusted -->
+
+                    <label for="serviceCharge">Service Charge ($):</label>
+                    <input type="number" id="serviceCharge" value="15.00" step="0.01">
+
+                    <label for="discountAmount">Discount ($):</label>
+                    <input type="number" id="discountAmount" value="0.00" step="0.01" min="0">
+
+                    <label for="gratuityPercent">Gratuity (%):</label>
+                    <input type="number" id="gratuityPercent" value="20" step="1">
+
+                    <label for="taxPercent">Tax (%):</label>
+                    <input type="number" id="taxPercent" value="8.89" step="0.01">
+                </fieldset>
+
+                 <fieldset>
+                    <legend>Footer</legend>
+                     <label for="footerPhone">Phone:</label>
+                    <input type="tel" id="footerPhone" value="+1 (201) 567-8475">
+
+                    <label for="footerWebsite">Website:</label>
+                    <input type="url" id="footerWebsite" value="www.jmsviplimo.com">
+
+                    <label for="footerEmail">Email:</label>
+                    <input type="email" id="footerEmail" value="info@jmsviplimo.com">
+                 </fieldset>
+
+                <button type="button" id="generate-pdf">Generate PDF Invoice</button>
+            </form>
+        </div>
+
+        <!-- Invoice Preview -->
+        <div class="invoice-preview-section">
+            <h2>Invoice Preview</h2>
+            <div id="invoice-preview" class="invoice-box">
+                <!-- Header -->
+                <div class="invoice-header">
+                    <img src="https://via.placeholder.com/100x80.png?text=LOGO" alt="Logo" id="preview-logo"> <!-- Replace with actual logo URL or path if available -->
+                    <div class="company-info">
+                        <div class="company-name" id="preview-companyName">JMS VIP Limo Worldwide Corporation</div>
+                        <div class="company-address" id="preview-companyAddress">250 South Van Brunt Street, Suite# F, Englewood, NJ 07631</div>
+                    </div>
+                </div>
+
+                <!-- Title and Date -->
+                <div class="invoice-title-section">
+                    <div class="invoice-title">INVOICE</div>
+                    <div class="invoice-date">Date: <span id="preview-invoiceDate">04/19/2025</span></div>
+                </div>
+
+                <!-- Confirmation Details -->
+                <table class="details-table confirmation-table">
+                    <tbody>
+                        <tr>
+                            <td>CONFIRMATION</td>
+                            <td id="preview-confirmationNumber">39356</td>
+                        </tr>
+                        <tr>
+                            <td>FARM-IN CONFIRMATION</td>
+                            <td id="preview-farmInConfirmation">HOME</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Ride Details -->
+                <table class="details-table ride-details-table">
+                     <tbody>
+                        <tr><td>PICKUP DATE</td><td id="preview-pickupDate">04/19/2025</td></tr>
+                        <tr><td>VEHICLE</td><td id="preview-vehicle">SEDAN</td></tr>
+                        <tr><td>RESERVATION PICKUP TIME</td><td id="preview-reservationTime">04:00 PM</td></tr>
+                        <tr><td>PICKUP TIME</td><td id="preview-pickupTime">04:00 PM</td></tr>
+                        <tr><td>Drop Off Time</td><td id="preview-dropoffTime">08:31 PM</td></tr>
+                        <tr><td>PICKUP POINT</td><td id="preview-pickupPoint">25 Columbus Cir, New York, NY</td></tr>
+                        <tr><td>PRIMARY PASSENGER</td><td id="preview-primaryPassenger">Natasha Kagalovsky</td></tr>
+                        <tr><td>ADDITIONAL PASSENGER/LUGGAGE</td><td id="preview-additionalPassengers">0</td></tr>
+                        <tr><td>Stop</td><td id="preview-stopLocation">425 E 20th St, New York, NY 10001</td></tr>
+                        <tr><td>DROP OFF LOCATION</td><td id="preview-dropoffLocation">25 Columbus Cir, New York, NY</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- Billing Details -->
+                <table class="billing-table">
+                    <thead>
+                        <tr>
+                            <th>DETAILS</th>
+                            <th>DESCRIPTION</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FLAT</td>
+                            <td id="preview-flatDescription">4 H 30 Mins x $95</td>
+                            <td id="preview-flatTotal">$427.50</td>
+                        </tr>
+                        <tr><td>STOPS</td><td></td><td id="preview-stopsCost">$0.00</td></tr>
+                        <tr><td>WAITING TIME</td><td></td><td id="preview-waitingCost">$0.00</td></tr>
+                        <tr><td>TOLL</td><td></td><td id="preview-tollCost">$0.00</td></tr>
+                        <tr><td>SERVICE CHARGE</td><td></td><td id="preview-serviceCharge">$15.00</td></tr>
+                        <tr><td>DISCOUNT</td><td></td><td id="preview-discountAmount">-$0.00</td></tr>
+                        <tr class="spacer"><td colspan="3"></td></tr> <!-- Spacer row -->
+                         <tr>
+                            <td>GRATUITY</td>
+                            <td id="preview-gratuityPercent">20%</td>
+                            <td id="preview-gratuityAmount">$85.50</td>
+                        </tr>
+                        <tr>
+                            <td>TAX</td>
+                            <td id="preview-taxPercent">8.89%</td>
+                            <td id="preview-taxAmount">$38.00</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">TOTAL</td>
+                            <td id="preview-totalAmount">$566.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <!-- Footer -->
+                 <div class="invoice-footer">
+                    <span id="preview-footerPhone">+1 (201) 567-8475</span>
+                    <span id="preview-footerWebsite">www.jmsviplimo.com</span>
+                    <span id="preview-footerEmail">info@jmsviplimo.com</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
