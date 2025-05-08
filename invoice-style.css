@@ -1,0 +1,174 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    background-color: #fff; /* Ensure content background is white for PDF */
+    position: relative; /* For watermark positioning */
+}
+
+#invoice-container {
+    width: 100%;
+    max-width: 800px; /* Typical A4/Letter width */
+    margin: auto;
+    position: relative; /* For watermark to be contained */
+    z-index: 1; /* Content above watermark */
+}
+
+#watermark-logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.08; /* Very faint */
+    z-index: 0; /* Behind content */
+    width: 60%; /* Adjust as needed */
+}
+
+#watermarkLogo {
+    width: 100%;
+    height: auto;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between; /* Pushes logo and company details apart */
+    align-items: center; /* Vertically aligns items in the header */
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #000; /* Thicker line below header */
+}
+
+.logo {
+    width: 80px; /* Adjust as needed */
+    height: auto;
+    margin-right: 20px; /* Space between logo and company name if they were side-by-side differently */
+}
+
+.company-details {
+    text-align: right;
+}
+
+.company-details h1 {
+    margin: 0;
+    font-size: 18px; /* Slightly smaller */
+    color: #D9534F; /* Red color */
+    font-weight: bold;
+}
+
+.company-details p {
+    margin: 0;
+    font-size: 10px; /* Smaller */
+    font-weight: bold;
+}
+
+.invoice-title-date {
+    margin-bottom: 15px;
+}
+
+.invoice-main-title {
+    font-size: 28px;
+    color: #D9534F; /* Red color */
+    margin: 0 0 5px 0;
+    font-weight: bold;
+}
+
+.invoice-title-date p {
+    font-size: 12px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.info-table, .financial-details {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 11px; /* Smaller font for tables */
+}
+
+.info-table td {
+    padding: 6px 4px; /* Reduced padding */
+    border-bottom: 1px dotted #888; /* Dotted lines */
+}
+
+.info-table .label {
+    font-weight: bold;
+    width: 35%; /* Give more space to labels */
+    color: #000;
+}
+.info-table .value {
+    text-align: right;
+    color: #333;
+}
+
+
+.financial-details th, .financial-details td {
+    padding: 6px 4px;
+    text-align: left;
+}
+
+.financial-details th {
+    background-color: #FFD700; /* Yellow background for header */
+    color: #000;
+    font-weight: bold;
+    border: 1px solid #000;
+}
+.financial-details th:nth-child(3), .financial-details td.amount  {
+    text-align: right;
+}
+
+
+.financial-details tbody td {
+    border-bottom: 1px dotted #888;
+}
+.financial-details tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.financial-details .amount {
+    text-align: right;
+    font-weight: normal;
+}
+
+.summary-separator td {
+    border-top: 1px solid #000; /* Solid line for Tax and Discount */
+}
+#discountRow td {
+     border-bottom: 1px solid #000; /* Solid line after discount before total */
+}
+
+
+.total-row td {
+    font-weight: bold;
+    font-size: 14px; /* Larger font for total */
+    background-color: #FFD700; /* Yellow background */
+    border-top: 2px solid #000 !important;
+    border-bottom: 2px solid #000 !important;
+    color: #D9534F; /* Red color for total amount */
+}
+.total-row td:first-child, .total-row td:nth-child(2) {
+     color: #000; /* Black for "TOTAL" text */
+}
+
+
+footer {
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    font-size: 10px;
+}
+footer span {
+    margin: 0 10px;
+}
+
+/* Specific for the original image look */
+.financial-details td:nth-child(1) { width: 30%; } /* Details column */
+.financial-details td:nth-child(2) { width: 40%; } /* Description column */
+.financial-details td:nth-child(3) { width: 30%; } /* Total column */
+
+/* Ensure dotted lines span full width available to cell content */
+.info-table td, .financial-details tbody td {
+    overflow: hidden; /* This can help with dotted line appearance in some cases */
+}
