@@ -23,7 +23,7 @@ body {
     transform: translate(-50%, -50%);
     opacity: 0.08; /* Very faint */
     z-index: 0; /* Behind content */
-    width: 50%; /* Adjust as needed */
+    width: 70%; /* Adjust as needed */
     max-width: 300px; /* Max size for watermark */
 }
 
