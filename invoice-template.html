@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice Preview</title>
+    <link rel="stylesheet" href="invoice-style.css">
+</head>
+<body>
+    <div id="invoice-container">
+        <div id="watermark-logo-container">
+            <img id="watermarkLogo" src="https://jmsviplimo.com/wp-content/uploads/2021/09/WhatsApp-Image-2021-08-10-at-12.49.29-PM.webp" alt="Watermark">
+        </div>
+
+        <header>
+            <img id="mainLogo" src="https://jmsviplimo.com/wp-content/uploads/2021/09/WhatsApp-Image-2021-08-10-at-12.49.29-PM.webp" alt="Company Logo" class="logo">
+            <div class="company-details">
+                <h1 id="companyNameDisplay">JMS VIP Limo Worldwide Corporation</h1>
+                <p id="companyAddressDisplay">250 South Van Brunt Street, Suite# F, Englewood, NJ 07631</p>
+            </div>
+        </header>
+
+        <section class="invoice-title-date">
+            <h2 class="invoice-main-title">INVOICE</h2>
+            <p>Date: <span id="invoiceDateDisplay">05/07/2025</span></p>
+        </section>
+
+        <table class="info-table">
+            <tr>
+                <td class="label">CONFIRMATION</td>
+                <td class="value" id="confirmationNumberDisplay">39385</td>
+            </tr>
+            <tr>
+                <td class="label">FARM-IN CONFIRMATION</td>
+                <td class="value" id="farmInConfirmationDisplay">HOME</td>
+            </tr>
+            <tr>
+                <td class="label">PICKUP DATE</td>
+                <td class="value" id="pickupDateDisplay">05/07/2025</td>
+            </tr>
+            <tr>
+                <td class="label">VEHICLE</td>
+                <td class="value" id="vehicleDisplay">SEDAN</td>
+            </tr>
+            <tr>
+                <td class="label">RESERVATION PICKUP TIME</td>
+                <td class="value" id="reservationPickupTimeDisplay">11:00 AM</td>
+            </tr>
+            <tr>
+                <td class="label">PICKUP TIME</td>
+                <td class="value" id="pickupTimeDisplay">11:00 AM</td>
+            </tr>
+            <tr>
+                <td class="label">Drop Off Time</td>
+                <td class="value" id="dropOffTimeDisplay"></td>
+            </tr>
+            <tr>
+                <td class="label">PICKUP POINT</td>
+                <td class="value" id="pickupPointDisplay">LaGuardia airport</td>
+            </tr>
+            <tr>
+                <td class="label">PRIMARY PASSENGER</td>
+                <td class="value" id="primaryPassengerDisplay">Frank Mazzagatti</td>
+            </tr>
+            <tr>
+                <td class="label">ADDITIONAL PASSENGER/LUGGAGE</td>
+                <td class="value" id="additionalPassengerLuggageDisplay">0</td>
+            </tr>
+            <tr>
+                <td class="label">Stop</td>
+                <td class="value" id="stopDetailsDisplay"></td>
+            </tr>
+            <tr>
+                <td class="label">DROP OFF LOCATION</td>
+                <td class="value" id="dropOffLocationDisplay">12 Kingswood Cir Old Bethpage NY 11804</td>
+            </tr>
+        </table>
+
+        <table class="financial-details">
+            <thead>
+                <tr>
+                    <th>DETAILS</th>
+                    <th>DESCRIPTION</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="flatRateRow">
+                    <td>FLAT</td>
+                    <td id="flatRateDescription"></td>
+                    <td class="amount" id="flatRateValueDisplay">$125.00</td>
+                </tr>
+                <tr id="hourlyRateRow" style="display:none;">
+                    <td>HOURLY</td>
+                    <td id="hourlyRateDescription"></td>
+                    <td class="amount" id="hourlyRateValueDisplay">$0.00</td>
+                </tr>
+                <tr>
+                    <td>STOPS</td>
+                    <td></td>
+                    <td class="amount" id="stopsChargeDisplay">$0.00</td>
+                </tr>
+                <tr>
+                    <td>WAITING TIME</td>
+                    <td></td>
+                    <td class="amount" id="waitingTimeChargeDisplay">$0.00</td>
+                </tr>
+                <tr>
+                    <td>TOLL</td>
+                    <td></td>
+                    <td class="amount" id="tollChargeDisplay">$0.00</td>
+                </tr>
+                <tr>
+                    <td>SERVICE CHARGE</td>
+                    <td></td>
+                    <td class="amount" id="serviceChargeDisplay">$15.00</td>
+                </tr>
+                <tr id="gratuityRow">
+                    <td>GRATUITY</td>
+                    <td id="gratuityDescriptionDisplay"></td>
+                    <td class="amount" id="gratuityValueDisplay">$0.00</td>
+                </tr>
+                <tr class="summary-separator">
+                    <td>TAX</td>
+                    <td id="taxDescriptionDisplay">8.89%</td>
+                    <td class="amount" id="taxValueDisplay">$11.11</td>
+                </tr>
+                <tr id="discountRow" class="summary-separator">
+                    <td>DISCOUNT</td>
+                    <td id="discountMessageDisplay">20%</td>
+                    <td class="amount" id="discountValueDisplay">-$30.22</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="2">TOTAL</td>
+                    <td class="amount" id="totalValueDisplay">$120.89</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer>
+            <span id="companyPhoneDisplay">+1 (201) 567-8475</span>
+            <span id="companyWebsiteDisplay">www.jmsviplimo.com</span>
+            <span id="companyEmailDisplay">info@jmsviplimo.com</span>
+        </footer>
+    </div>
+</body>
+</html>
