@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 15px; font-size: 14px; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 4px; font-weight: bold; }
+        input[type="text"], input[type="date"], input[type="time"], input[type="number"], select, textarea {
+            width: calc(100% - 12px);
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] { margin-right: 5px; }
+        fieldset { border: 1px solid #ddd; padding: 10px; margin-bottom: 15px; }
+        legend { font-weight: bold; color: #333; }
+        .rate-options input[type="number"] { width: calc(50% - 20px); }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <form id="invoiceForm">
+        <fieldset>
+            <legend>Company & Invoice Info</legend>
+            <div class="form-group">
+                <label for="logoUrl">Logo URL:</label>
+                <input type="text" id="logoUrl" value="https://jmsviplimo.com/wp-content/uploads/2021/09/WhatsApp-Image-2021-08-10-at-12.49.29-PM.webp">
+            </div>
+            <div class="form-group">
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" value="JMS VIP Limo Worldwide Corporation">
+            </div>
+            <div class="form-group">
+                <label for="companyAddress">Company Address:</label>
+                <input type="text" id="companyAddress" value="250 South Van Brunt Street, Suite# F, Englewood, NJ 07631">
+            </div>
+            <div class="form-group">
+                <label for="invoiceDate">Invoice Date:</label>
+                <input type="date" id="invoiceDate" value="2025-05-07">
+            </div>
+             <div class="form-group">
+                <label for="companyPhone">Company Phone:</label>
+                <input type="text" id="companyPhone" value="+1 (201) 567-8475">
+            </div>
+            <div class="form-group">
+                <label for="companyWebsite">Company Website:</label>
+                <input type="text" id="companyWebsite" value="www.jmsviplimo.com">
+            </div>
+            <div class="form-group">
+                <label for="companyEmail">Company Email:</label>
+                <input type="text" id="companyEmail" value="info@jmsviplimo.com">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Confirmation Details</legend>
+            <div class="form-group">
+                <label for="confirmationNumber">Confirmation #:</label>
+                <input type="text" id="confirmationNumber" value="39385">
+            </div>
+            <div class="form-group">
+                <label for="farmInConfirmation">Farm-In Confirmation:</label>
+                <input type="text" id="farmInConfirmation" value="HOME">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Trip Details</legend>
+            <div class="form-group">
+                <label for="pickupDate">Pickup Date:</label>
+                <input type="date" id="pickupDate" value="2025-05-07">
+            </div>
+            <div class="form-group">
+                <label for="vehicle">Vehicle:</label>
+                <input type="text" id="vehicle" value="SEDAN">
+            </div>
+            <div class="form-group">
+                <label for="reservationPickupTime">Reservation Pickup Time:</label>
+                <input type="time" id="reservationPickupTime" value="11:00">
+            </div>
+            <div class="form-group">
+                <label for="pickupTime">Pickup Time:</label>
+                <input type="time" id="pickupTime" value="11:00">
+            </div>
+            <div class="form-group">
+                <label for="dropOffTime">Drop Off Time:</label>
+                <input type="time" id="dropOffTime" value="">
+            </div>
+            <div class="form-group">
+                <label for="pickupPoint">Pickup Point:</label>
+                <input type="text" id="pickupPoint" value="LaGuardia airport">
+            </div>
+            <div class="form-group">
+                <label for="primaryPassenger">Primary Passenger:</label>
+                <input type="text" id="primaryPassenger" value="Frank Mazzagatti">
+            </div>
+            <div class="form-group">
+                <label for="additionalPassengerLuggage">Additional Passenger/Luggage:</label>
+                <input type="text" id="additionalPassengerLuggage" value="0">
+            </div>
+            <div class="form-group">
+                <label for="stopDetails">Stop Details (e.g., "1 stop at XYZ"):</label>
+                <input type="text" id="stopDetails" value="">
+            </div>
+            <div class="form-group">
+                <label for="dropOffLocation">Drop Off Location:</label>
+                <input type="text" id="dropOffLocation" value="12 Kingswood Cir Old Bethpage NY 11804">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Rate Details</legend>
+            <div class="form-group">
+                <label>Rate Type:</label>
+                <input type="radio" id="rateTypeFlat" name="rateType" value="flat" checked> <label for="rateTypeFlat" style="display:inline;">Flat</label>
+                <input type="radio" id="rateTypeHourly" name="rateType" value="hourly"> <label for="rateTypeHourly" style="display:inline;">Hourly</label>
+            </div>
+            <div id="flatRateSection" class="form-group">
+                <label for="flatRate">Flat Rate ($):</label>
+                <input type="number" id="flatRate" value="125.00" step="0.01">
+            </div>
+            <div id="hourlyRateSection" class="rate-options hidden">
+                <div class="form-group">
+                    <label for="hourlyRate">Hourly Rate ($):</label>
+                    <input type="number" id="hourlyRate" value="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="hours">Hours:</label>
+                    <input type="number" id="hours" value="0" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="minutes">Minutes:</label>
+                    <input type="number" id="minutes" value="0" step="1" max="59" min="0">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="stopsCharge">Stops Charge ($):</label>
+                <input type="number" id="stopsCharge" value="0.00" step="0.01">
+            </div>
+            <div class="form-group">
+                <label for="waitingTimeCharge">Waiting Time Charge ($):</label>
+                <input type="number" id="waitingTimeCharge" value="0.00" step="0.01">
+            </div>
+            <div class="form-group">
+                <label for="tollCharge">Toll Charge ($):</label>
+                <input type="number" id="tollCharge" value="0.00" step="0.01">
+            </div>
+            <div class="form-group">
+                <label for="serviceCharge">Service Charge ($):</label>
+                <input type="number" id="serviceCharge" value="15.00" step="0.01">
+            </div>
+            <div class="form-group">
+                <label for="gratuityPercent">Gratuity (%):</label>
+                <input type="number" id="gratuityPercent" value="0" step="0.01">
+            </div>
+            <div class="form-group">
+                <label for="taxPercent">Tax (%):</label>
+                <input type="number" id="taxPercent" value="8.89" step="0.01">
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Discount</legend>
+            <div class="form-group">
+                <input type="checkbox" id="showDiscount" checked>
+                <label for="showDiscount" style="display:inline;">Show Discount Row</label>
+            </div>
+            <div id="discountOptions" class="form-group">
+                <label for="discountPercent">Discount (%):</label>
+                <input type="number" id="discountPercent" value="20" step="0.01">
+                <label for="discountMessage">Discount Message (Description):</label>
+                <input type="text" id="discountMessage" value="20%">
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>
