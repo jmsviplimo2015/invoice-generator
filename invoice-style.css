@@ -102,7 +102,7 @@ header {
     border: 1px solid #000; /* Solid border like financial header */
 }
 .info-table tr.info-table-header td.value {
-    text-align: right; /* Keep values right-aligned for these headers as per original */
+    text-align: left; /* Keep values right-aligned for these headers as per original */
 }
 
 
