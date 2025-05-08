@@ -1,10 +1,11 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 20px; /* Provides padding around the whole invoice content */
     color: #333;
     background-color: #fff; /* Ensure content background is white for PDF */
     position: relative; /* For watermark positioning */
+    font-size: 12px; /* Increased base font size slightly for PDF */
 }
 
 #invoice-container {
@@ -22,7 +23,8 @@ body {
     transform: translate(-50%, -50%);
     opacity: 0.08; /* Very faint */
     z-index: 0; /* Behind content */
-    width: 60%; /* Adjust as needed */
+    width: 50%; /* Adjust as needed */
+    max-width: 300px; /* Max size for watermark */
 }
 
 #watermarkLogo {
@@ -30,36 +32,36 @@ body {
     height: auto;
 }
 
-
 header {
-    display: flex;
-    justify-content: space-between; /* Pushes logo and company details apart */
-    align-items: center; /* Vertically aligns items in the header */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within child elements */
     margin-bottom: 20px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     border-bottom: 2px solid #000; /* Thicker line below header */
 }
 
 .logo {
-    width: 80px; /* Adjust as needed */
+    width: 100px; /* Adjust as needed */
     height: auto;
-    margin-right: 20px; /* Space between logo and company name if they were side-by-side differently */
+    margin-bottom: 10px; /* Space between logo and company details */
 }
 
 .company-details {
-    text-align: right;
+    text-align: center; /* Ensure text is centered */
 }
 
 .company-details h1 {
-    margin: 0;
-    font-size: 18px; /* Slightly smaller */
+    margin: 0 0 3px 0; /* Small margin below h1 */
+    font-size: 20px; /* Slightly larger */
     color: #D9534F; /* Red color */
     font-weight: bold;
 }
 
 .company-details p {
     margin: 0;
-    font-size: 10px; /* Smaller */
+    font-size: 12px; /* Slightly larger */
     font-weight: bold;
 }
 
@@ -68,14 +70,14 @@ header {
 }
 
 .invoice-main-title {
-    font-size: 28px;
+    font-size: 30px; /* Increased size */
     color: #D9534F; /* Red color */
     margin: 0 0 5px 0;
     font-weight: bold;
 }
 
 .invoice-title-date p {
-    font-size: 12px;
+    font-size: 13px; /* Increased size */
     margin: 0;
     font-weight: bold;
 }
@@ -84,27 +86,47 @@ header {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    font-size: 11px; /* Smaller font for tables */
+    font-size: 12.5px; /* Increased font size for tables */
 }
 
 .info-table td {
-    padding: 6px 4px; /* Reduced padding */
+    padding: 7px 5px; /* Increased padding */
     border-bottom: 1px dotted #888; /* Dotted lines */
 }
 
+/* Style for CONFIRMATION and FARM-IN CONFIRMATION rows */
+.info-table tr.info-table-header td {
+    background-color: #FFD700; /* Yellow background */
+    font-weight: bold;
+    color: #000;
+    border: 1px solid #000; /* Solid border like financial header */
+}
+.info-table tr.info-table-header td.value {
+    text-align: right; /* Keep values right-aligned for these headers as per original */
+}
+
+
 .info-table .label {
     font-weight: bold;
-    width: 35%; /* Give more space to labels */
+    width: 40%; /* Adjust width for labels */
     color: #000;
+    text-align: left; /* Ensure labels are left-aligned */
+    padding-right: 10px; /* Add some space between label and value if they are in same conceptual column */
 }
 .info-table .value {
-    text-align: right;
+    text-align: left; /* Values in regular rows left-aligned */
     color: #333;
+    width: 60%; /* Adjust width for values */
+}
+
+/* For rows that are NOT headers, ensure value is left aligned */
+.info-table tr:not(.info-table-header) td.value {
+    text-align: left;
 }
 
 
 .financial-details th, .financial-details td {
-    padding: 6px 4px;
+    padding: 7px 5px; /* Increased padding */
     text-align: left;
 }
 
@@ -141,7 +163,7 @@ header {
 
 .total-row td {
     font-weight: bold;
-    font-size: 14px; /* Larger font for total */
+    font-size: 15px; /* Larger font for total */
     background-color: #FFD700; /* Yellow background */
     border-top: 2px solid #000 !important;
     border-bottom: 2px solid #000 !important;
@@ -157,10 +179,13 @@ footer {
     padding-top: 10px;
     border-top: 1px solid #ccc;
     text-align: center;
-    font-size: 10px;
+    font-size: 11.5px; /* Increased size */
+    display: flex; /* Use flexbox for spacing */
+    justify-content: space-around; /* Distribute items evenly */
+    align-items: center;
 }
 footer span {
-    margin: 0 10px;
+    /* margin: 0 10px; Removed fixed margin, rely on justify-content */
 }
 
 /* Specific for the original image look */
