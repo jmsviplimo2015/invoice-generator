@@ -230,12 +230,23 @@ window.addEventListener('DOMContentLoaded', () => {
         downloadPdfButton.disabled = true;
 
         try {
+            // Inside the downloadPdfButton event listener, for html2canvas options:
             const canvas = await html2canvas(invoiceContent, {
-                scale: 2, // Increase scale for better quality
-                useCORS: true, // Important for external images like the logo
+                scale: 2,
+                useCORS: true,
                 logging: true,
-                onclone: (clonedDoc) => { // Ensure styles are fully applied in the cloned document
-                    // You might need to re-apply certain styles if they don't carry over
+                scrollX: 0, // Explicitly set scroll positions
+                scrollY: 0,
+                windowWidth: invoiceContent.scrollWidth, // Use content's scroll dimensions
+                windowHeight: invoiceContent.scrollHeight,
+                onclone: (clonedDoc) => {
+                    // If there are any dynamic styles or elements that don't copy well,
+                    // you might need to re-apply or adjust them in the clonedDoc here.
+                    // For example, ensuring visibility of elements.
+                    const clonedWatermark = clonedDoc.getElementById('watermark-logo-container');
+                    if (clonedWatermark) {
+                        clonedWatermark.style.opacity = '0.08'; // Re-assert opacity if needed
+                    }
                 }
             });
 
